@@ -405,3 +405,36 @@ document.querySelectorAll('.dropdown-content a').forEach(link => {
     }
   });
 });
+
+// ajout en plus 
+
+const images = document.querySelectorAll('.zoom-img');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalText = document.getElementById('modal-text');
+const closeBtn = document.getElementById('close-modal');
+
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    modalTitle.textContent = img.dataset.title || '';
+    modalText.innerHTML = img.dataset.text;
+    modal.classList.remove('hidden');
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.add('hidden');
+  }
+});
+
+modal.classList.remove('hidden');
+document.body.classList.add('modal-open');
+
+
+modal.classList.add('hidden');
+document.body.classList.remove('modal-open');
