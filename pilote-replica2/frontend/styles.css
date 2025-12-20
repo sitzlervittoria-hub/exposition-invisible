@@ -1,0 +1,670 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Puis remplacez toutes les font-family par ceci : */
+body, 
+.page-title,
+.page-intro,
+.salle-title,
+.sous-titre,
+.sous-sous-titre,
+.texte,
+.image-text-content,
+.image-text-content h4,
+.image-caption,
+.play-button,
+.audio-control-button,
+.enfant-fermer,
+.close,
+.modal-caption {
+  font-family: 'Outfit', Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(235, 235, 230);
+  color: rgb(0, 0, 0);
+  font-family: 'Outfit', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#hero img {
+  width: 80vw;
+  object-fit: cover;
+}
+
+#projects {
+  padding: 80px 5vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+}
+
+.project-card img {
+  width: 100%;
+  transition: transform 0.6s ease-out;
+}
+
+.project-card:hover img {
+  transform: scale(1.1);
+}
+
+.project-card h2 {
+  margin-top: 10px;
+}
+
+.zoom-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.zoom-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: rgb(235, 235, 230);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader-text {
+  color: black;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  opacity: 1;
+}
+
+.zoom-img {
+  filter: none;
+}
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+
+
+/* ===== MENU FIXE TRANSPARENT ===== */
+
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 80px;
+
+  padding: 0 5vw; /* toujours aligné */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+  color: black;
+
+  z-index: 9999;
+}
+
+.menu-left a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.menu-right {
+  display: flex;
+  gap: 30px;
+}
+
+.menu-right a {
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.menu-left a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#menu a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: inherit;
+}
+
+
+/* ===== CURSEUR PERSONNALISÉ ===== */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;              /* tu peux mettre white si tu veux */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  mix-blend-mode: normal;
+  
+}
+/* ===== STYLES POUR LE BOUTON AUDIO DE VICTOR JARA ===== */
+.victor-jara-audio-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.victor-jara-audio-container .play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.victor-jara-audio-container .play-overlay::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 18px solid white;
+  margin-left: 4px;
+}
+
+.victor-jara-audio-container .play-overlay.playing {
+  background-color: rgba(220, 53, 69, 0.7);
+}
+
+.victor-jara-audio-container .play-overlay.playing::after {
+  content: '';
+  width: 18px;
+  height: 20px;
+  background-color: white;
+  border: none;
+  margin-left: 0;
+}
+
+.audio-control-button {
+  display: inline-block;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.audio-control-button:hover {
+  background: #555;
+}
+
+.audio-control-button.playing {
+  background: #dc3545;
+}
+
+/* ===== RECTANGLE D'EXPLICATION POUR ENFANTS ===== */
+.enfant-explication-rectangle {
+  display: none;
+  position: relative;
+  background: linear-gradient(135deg, #e3f2fd 0%, #fff9c4 100%);
+  border: 4px solid #ffccd5;
+  border-radius: 25px;
+  padding: 30px;
+  margin: 20px auto 30px;
+  max-width: 900px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 100;
+  animation: slideDown 0.5s ease-out;
+  grid-column: 1 / -1;
+}
+
+/* Bouton fermer - EN HAUT ET EN ROSE */
+.enfant-explication-rectangle .enfant-fermer {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ff6b6b; /* Rose/rouge */
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  line-height: 1;
+  padding: 0;
+}
+
+.enfant-explication-rectangle .enfant-fermer:hover {
+  background: #ff4757; /* Rose plus foncé au survol */
+  transform: scale(1.1);
+}
+
+/* Le bouton d'affichage avec texte reste inchangé */
+.enfant-bouton-full {
+  background: transparent;
+  border: none;
+  padding: 8px 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: normal;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 3px;
+  flex-shrink: 0; /* Empêche le bouton de rétrécir */
+}
+
+.enfant-bouton-full:hover {
+  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.enfant-bouton-full img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.enfant-bouton-full span {
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ===== IMAGE ENFANT DANS LE RECTANGLE ===== */
+.enfant-image-droite {
+  position: absolute;
+  top: 50%; /* Centre verticalement */
+  right: 20px;
+  transform: translateY(-50%); /* Ajuste le centrage vertical */
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Curseur main pour indiquer que c'est cliquable */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enfant-image-droite:hover {
+  transform: translateY(-50%) scale(1.05); /* Maintient le centrage avec le zoom */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.enfant-image-droite img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.enfant-image-droite:hover img {
+  transform: scale(1.1);
+}
+
+/* Contenu texte avec marge à droite pour l'image */
+.enfant-contenu {
+  margin-right: 150px;
+  padding-right: 10px;
+}
+
+/* Responsive pour le bouton enfant-bouton-full */
+@media (max-width: 600px) {
+  .image-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Sur mobile, toutes les images ont la même hauteur */
+  .image-item img,
+  .image-item-container .image-item img {
+    height: 200px;
+  }
+  
+  .enfant-bouton-full {
+    font-size: 0.75rem;
+    padding: 5px 3px;
+    gap: 4px;
+  }
+  
+  .enfant-bouton-full img {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .enfant-bouton-full span {
+    font-size: 0.75rem;
+  }
+  
+  /* Bouton fermer sur mobile */
+  .enfant-explication-rectangle .enfant-fermer {
+    top: 12px;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Ajustement pour l'image enfant sur mobile */
+@media (max-width: 600px) {
+  .enfant-image-droite {
+    width: 100px;
+    height: 100px;
+    right: 15px;
+  }
+  
+  .enfant-contenu {
+    margin-right: 120px;
+  }
+}
+
+/* Ajustement pour très petits écrans */
+@media (max-width: 400px) {
+  .enfant-image-droite {
+    width: 80px;
+    height: 80px;
+    right: 10px;
+  }
+  
+  .enfant-contenu {
+    margin-right: 100px;
+  }
+
+  
+}
+/* Conteneur pour les images avec bouton dans les rangées */
+.image-text-row .image-item-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.image-text-row .image-item-container img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: block;
+}
+
+.image-text-row .image-item-container img:hover {
+  opacity: 0.9;
+}
+
+/* Bouton pour les images dans les rangées */
+.image-text-row .enfant-bouton-full {
+  margin-top: 10px;
+  padding: 8px 12px;
+  width: 17%;
+  box-sizing: border-box;
+  
+  box-sizing: border-box;
+  text-align: center; /* Pour centrer le texte et l'icône à l'intérieur */
+  align-self: center; /* Pour centrer le bouton dans le conteneur flex */
+}
+
+/* Style pour le rectangle de la Madeleine - IMAGE PLUS GRANDE */
+.madeleine-explication .enfant-image-droite {
+  width: 300px; /* Plus grand que celui de Madame X */
+  height: 300px;
+}
+
+.madeleine-explication .enfant-image-droite img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Style pour le rectangle de Madame X - GARDER LA TAILLE ACTUELLE */
+#enfant-explication-salle3 .enfant-image-droite {
+  width: 200px;
+  height: auto;
+}
+
+#enfant-explication-salle3 .enfant-image-droite img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 250px;
+}
+
+/* Ajustement des marges pour le texte */
+.madeleine-explication .enfant-contenu {
+  margin-right: 320px; /* Plus d'espace pour l'image plus grande */
+}
+
+#enfant-explication-salle3 .enfant-contenu {
+  margin-right: 230px; /* Conserver l'espace actuel */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .madeleine-explication .enfant-image-droite,
+  #enfant-explication-salle3 .enfant-image-droite {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    height: auto;
+  }
+  
+  .madeleine-explication .enfant-image-droite img {
+    height: auto;
+    max-height: 300px;
+  }
+  
+  .madeleine-explication .enfant-contenu,
+  #enfant-explication-salle3 .enfant-contenu {
+    margin-right: 0;
+    padding-right: 0;
+  }
+  
+}
+
+/* Style pour le rectangle de la salle 1 - même taille que salle 2 */
+.salle1-explication .enfant-image-droite {
+  width: 200px;
+  height: auto;
+}
+
+.salle1-explication .enfant-image-droite img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 250px;
+}
+
+.salle1-explication .enfant-contenu {
+  margin-right: 230px;
+}
+
+/* Responsive pour la salle 1 */
+@media (max-width: 900px) {
+  .salle1-explication .enfant-image-droite {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    height: auto;
+  }
+  
+  .salle1-explication .enfant-contenu {
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+/* ===== MENU DÉROULANT POUR ŒUVRES ===== */
+.menu-right .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-right .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.menu-right .dropdown-arrow {
+  font-size: 0.7em;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.menu-right .dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgb(235, 235, 230);
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10001;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.menu-right .dropdown-content a {
+  display: block;
+  padding: 12px 20px;
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.menu-right .dropdown-content a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu-right .dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+.menu-right .dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+/* Style pour les titres de sections dans le dropdown */
+.dropdown-section-title {
+  font-weight: bold !important;
+  color: #333 !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  pointer-events: none; /* Les titres ne sont pas cliquables */
+}
+
+.dropdown-section-title:hover {
+  background-color: transparent !important;
+}
+
+/* Style pour les sous-items */
+.dropdown-subitem {
+  font-size: 0.9rem !important;
+  padding-left: 30px !important;
+  color: #555 !important;
+}
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 80px;
+  padding: 0 5vw; /* toujours aligné */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  /* CHANGE ICI - remplace transparent par une couleur plus foncée */
+  background: rgb(210, 210, 200);
+  color: black;
+  
+  z-index: 9999;
+}
