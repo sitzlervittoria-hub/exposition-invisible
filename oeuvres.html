@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Œuvres</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <!-- TON SCRIPT -->
+  <script src="scripts.js"></script>
+
   <style>
     /* Styles spécifiques pour la page Œuvres */
     .page-container {
@@ -470,6 +481,7 @@
 </head>
 
 <body>
+
   <!-- Curseur personnalisé -->
   <div id="custom-cursor"></div>
 
@@ -479,6 +491,7 @@
     <img class="modal-content" id="modalImage">
     <div id="modalCaption" class="modal-caption"></div>
   </div>
+
 
   <nav id="menu">
     <div class="menu-left">
@@ -510,6 +523,7 @@
   </div>
 </nav>
 
+
   <div class="page-container">
     <h1 class="page-title">Œuvres</h1>
     <p class="page-intro" style="font-size: 1.3em; font-weight: bold; text-align: center;">
@@ -517,11 +531,25 @@
   Chaque salle explore une thématique différente de l'invisible à travers diverses 
   formes d'expression artistique.
 </p>
+
+            <!-- Bouton de téléchargement du catalogue -->
+    <div class="catalog-download">
+      <a
+        href="images/L'invisible - Catalogue (Vittoria, Noémie, Naïs, Miyu).pdf"
+        target="_blank"
+        rel="noopener"
+        class="catalog-button"
+      >
+        ⬇ Télécharger le catalogue (PDF)
+      </a>
+
+    </div>
+
     <p class="texte">
       De la notion d’invisible découle nécessairement l’idée d’un espace inatteignable pour les sens humains. L’invisible, c’est ce qu’on ne peut qu’imaginer car la perception nous en est proscrite. Il peut s’agir de perception visuelle, mais pas uniquement : tant que plusieurs de nos sens ne perçoivent pas quelque chose, cette chose demeure invisible. L’invisible représente ainsi tout ce qui échappe à une perception immédiate, qu’il s’agisse d’états intérieurs, d’émotions, de relations sociales ou de structures mentales qui ne sont pas directement saisissables par la vue seule. Cette invisibilité n’implique pas l’inexistence ; au contraire, elle souligne la présence de réalités actives mais difficiles à représenter. Selon Paul Klee, « l’art ne reproduit pas le visible, il le rend visible ». L’invisible dans l’art constitue alors une remise en question de la mimêsis traditionnelle : au lieu de copier la nature, l’art dévoile, tel un révélateur, ce que notre regard ordinaire ne peut appréhender spontanément, en donnant forme à des aspects cachés de l’expérience humaine ou du monde. Il ouvre ainsi une relation sensible à des phénomènes abstraits, inconscients ou latents qui ne seraient autrement pas accessibles à la conscience seule.
     </p>
     <p class="texte">
-      L'idée est alors de comprendre comment l'art révèle ce qui est caché. Deux approches sont intéressantes : comment l'art s'est confronté à l'invisible en tant que chose imperceptible, inconnaissable. Puis comment il s’est confronté aux choses invisibles, intangibles dans notre vie pour les figurer ou simplement en faire une idée abstraite. Enfin comment il s’est confronté aux sujets invisibilisés au sein de nos sociétés ou par des autorités de tous genres, il s’agit ici des tabous et de la censure.
+      L'idée est alors de comprendre comment l'art révèle ce qui est caché. Trois approches sont intéressantes : comment l'art s'est confronté à l'invisible en tant qu'objet. Puis comment il a tenté de figurer l'invisible en tant que sujet. Enfin comment il s’est confronté aux sujets invisibilisés au sein de nos sociétés ou par des autorités. En somme, qu'est-ce que l'invisible dans l'art ?
     </p>
 
     <!-- SALLE 1 -->
@@ -600,9 +628,9 @@
     <p>
       As-tu deviné ?<br>
       Pour 4'33", c'est l'ouïe<br>
-      Pour Inert Gas Series/Helium, c'est l'ouïe, le toucher, l'odorat, le goût<br>
-      Pour The Void, le toucher, la vue<br>
-      Pour Generator, la vue, l'ouïe 
+      Pour Inert Gas Series/Helium, c'est la vue, l'ouïe, le toucher, l'odorat, le goût (ça fait beaucoup !)<br>
+      Pour The Void, c'est le toucher et la vue (on peut entendre parler de l'exposition mais pas la voir)<br>
+      Pour Generator, c'est la vue et l'ouïe 
     </p>
     <p>
       Bravo à toi ! On se revoit à la prochaine salle 😀
@@ -619,8 +647,9 @@
         Composition, John Cage, 1952, États-Unis, durée : 4 min 33 s, MoMA, New York
       </p>
       <p>
-        4'33" est une composition de John Cage qui se compose de quatre minutes et trente-trois secondes de silence. Elle a été jouée pour la première fois en 1952 et est largement considérée comme l'un des morceaux de musique les plus importants du XXe siècle. Le concept de cette pièce est de défier l'idée conventionnelle de ce qu'est la musique et de souligner l'importance des sons présents dans l'environnement, par opposition à une composition obligatoirement composée par un musicien. Pendant 4 minutes et 33 secondes, Cage invite les interprètes et le public à écouter les sons qui se produisent en dehors de la musique, et encourage chacun à faire l'expérience de son environnement à travers la musique. 4’33’’ est une révolution du monde de la musique, celle du discours invisible et nombreuses des œuvres de cette salle en ont fait une inspiration absolue.
+        4'33" est une composition de John Cage qui se compose de quatre minutes et trente-trois secondes de silence. Elle a été jouée pour la première fois en 1952 et est largement considérée comme l'un des morceaux de musique les plus importants du XXe siècle. Cette pièce est de défie l'idée conventionnelle de ce qu'est la musique et souligne l'importance des sons présents dans l'environnement de l'auditeur, par opposition à une composition obligatoirement composée par le musicien c'est le public qui crée le morceau. Pendant 4 minutes et 33 secondes, Cage invite les interprètes et le public à écouter les sons qui se produisent en dehors de la musique, et encourage chacun à faire l'expérience de son environnement à travers la musique. 4’33’’ est une révolution du monde de la musique, celle du discours invisible et nombreuses des œuvres de cette salle en ont fait une inspiration absolue.
       </p>
+      <button class="audio-control-button" id="audio433Button" onclick="toggle433Audio()"> ▶ Écouter l’enregistrement </button>
     </div>
   </div>
 
@@ -645,6 +674,7 @@
       <p>
         Photographie, Yves Klein, 1958, France, dimensions variables, Galerie Iris Clert, Paris, Photo : © All rights reserved © The Estate of Yves Klein c/o ADAGP
       </p>
+      <p>Le 28 avril 1958, l’artiste français Yves Klein ouvre sa première exposition à la galerie Iris Clert à Paris. Le spectacle, appelé « La spécialisation de la sensibilité à l’état de matière première en sensibilité en stabilisale picturale, Le Vide » a eu lieu dans une galerie de moins de 20m2 complètement vidée : tous les objets ont été retirés de l’espace de la galerie en dehors d’une vitrine et tous les murs ont été peints en blanc par l’artiste lui-même. Pendant 48 heures Klein expose l’invisible. Peu de temps après, l’artiste Arman prendra son contrepied en créant l’exposition « Le Plein », où il remplira la galerie jusqu’à en empêcher l’entrée. </p>
     </div>
   </div>
 
@@ -694,6 +724,7 @@
       <p>
         Installation environnementale permanente (Photographie), 400 mâts en acier inoxydable, Walter De Maria, 1977, États-Unis, 400 mâts en acier inoxydable sur 1 mile × 1 km, Dia Art Foundation
       </p>
+      <p>La réflexion de Marina Abramovic autour de l’expérience sensorielle dans le paysage se retrouve dans cette oeuvre de land art par Walter de Maria, une série de poteaux en acier inoxydable dont les surfaces réfléchissantes capturent et amplifient la lumière à la fois du soleil et des tempêtes électriques, créant une connexion éphémère entre la terre et le ciel. Influencée par la phénoménologie de Merleau-Ponty, elle met l’accent sur une expérience sensible qui dépasse le cadre de la « pure visibilité ».</p>
     </div>
     <img src="images/1.5_lightning_field.jpg" alt="Bouddha offrant sa protection" onclick="openModal(this)">
   </div>
@@ -706,6 +737,10 @@
       <p>
         Installation conceptuelle, Giovanni Anselmo, 1971, Italie, dimensions variables, collections et archives de l’artiste
       </p>
+      <p>
+        "[…] Avec cette projection intitulée Invisible, j’ai souhaité réaliser une œuvre invisible. Le projecteur projette, à une distance d’un mètre ou un peu plus, l'image d’une diapositive sur laquelle est écrit le mot « VISIBILE ». La projection est réalisée en champ ouvert, c’est-à-dire sans écrans intermédiaires, et le texte n’est pas visible car il est projeté dans l’air. Le point lumineux qui apparaît au loin est une sorte de rappel qui nous invite à vérifier l’invisible. En interceptant la projection avec le corps au point de focalisation, l’inscription « VISIBILE » apparaît, car la main ou le bras qui, par exemple, fait office d’écran, est effectivement visible. L’invisible est le visible qui ne peut être vu. Par conséquent, si j’ai créé une œuvre invisible, je n’ai pu le faire qu’en créant en dernière instance une œuvre visible."
+      </p>
+      <p>Giovanni Anselmo</p>
     </div>
   </div>
 
@@ -729,7 +764,7 @@
     <!-- Troisième image (sans bouton) -->
     <div class="image-item" onclick="openModal(this)">
       <img src="images/1.9_gilbert_et_georges.jpg" alt="Œuvre 3 Salle 1">
-      <div class="image-caption">"Le Vide" - Photographie, 1958</div>
+      <div class="image-caption">Gilbert & George - Photographie couleur, Gilbert & George, années 1990–2000</div>
     </div>
   </div>
 
@@ -751,6 +786,9 @@
       <p>
         Installation environnementale permanente (Photographie), 400 mâts en acier inoxydable, Walter De Maria, 1977, États-Unis, 400 mâts en acier inoxydable sur 1 mile × 1 km, Dia Art Foundation
       </p>
+      <p>
+        Un homme se cache sur cette image, saurez-vous le trouver ?
+      </p>
     </div>
     <img src="images/1.8_liu_bolin.png" alt="Bouddha offrant sa protection" onclick="openModal(this)">
   </div>
@@ -771,11 +809,11 @@
 
 <h3 class="sous-titre" id="salle1-absence">L'absence comme présence</h3>
   <p class="texte">
-    Comment l'oeuvre peut-elle être là sans insister sur sa présence ? Comment la disparition peut-elle devenir l'autre nom de la manifestation ? 
-    En art, en musique et en photographie, l'espace vide n'est pas rien. On l'appelle l'espace négatif. Il s'agit de l'espace vide autour et entre le sujet d'une image. Le sujet lui-même est appelé espace positif : la figure, l'objet ou l'élément principal. Tout ce qui l'entoure, l'espace inutilisé, est l'espace négatif. Dans le tracé d’un cercle, on retrouve par exemple cet espace creux, un manque d’existence qui crée un équilibre, un invisible sans qui le visible n’aurait pas de sens. L’absence devient alors présence, lorsque l’invisible se met au service du visible.
+    « Le propre du visible est d’avoir une doublure d’invisible au sens strict, qu’il rend présent comme une certaine absence. » Maurice Merleau-Ponty. En d’autres termes, toute construction du visible, toute présence iconique, toute représentation implique une part d’invisible, une forme d’absence ou une présence plus réelle encore, hors champ, que celle de l’image définie traditionnellement comme visible. Inverser cette dynamique c’est utiliser cette absence comme sujet. Comment la disparition peut-elle devenir l'autre nom de la manifestation ? Comment l'oeuvre peut-elle être là sans insister sur sa présence ? Lorsque l’absence devient une présence, l’invisible devient un manque que l’on cherche désespérément à combler.
   </p>
   
   <h4 class="sous-sous-titre">L'aniconisme</h4>
+  <p class="texte">L’art a été avant tout mobilisé par le besoin de représenter le divin, de rendre sensible ce qui dépasse l’entendement humain. Représenter le sacré implique alors une tension : comment donner forme à ce qui, par définition, excède toute forme ? Face à cela, dans certaines traditions, l’art religieux renonce à la figuration, comme en témoigne les traditions aniconiques de l’Islam ou de l’Hindouisme, pratique consistant à éviter la représentation des icônes religieuses afin d’éviter l’idolâtrie et de maintenir le culte centré uniquement sur le divin. Cette non-figuration permet au divin et sa grandeur de se manifester précisément  par ce qui n’est pas montré.</p>
   
 
     <!-- Galerie de 2 images centrées juste en dessous (œuvres 4 et 5) -->
@@ -799,8 +837,7 @@
         Sculpture rituelle, pierre, Inde, date indéterminée, dimensions variables, The Metropolitan Museum of Art, New York, n° d’inv. 1993.547
       </p>
       <p>
-        L’art a été avant tout mobilisé par le besoin de représenter le divin, de rendre sensible ce qui dépasse l’entendement humain. Représenter le sacré implique alors une tension : comment donner forme à ce qui, par définition, excède toute forme ? Face à cela, dans certaines traditions, l’art religieux renonce à la figuration, comme en témoigne les traditions aniconiques de l’Islam ou de l’Hindousime. Cette non-figuration permet au divin de se manifester précisément par ce qui n’est pas montré.
-        Ici, le linga est une forme non figurative du Shiva, l’un des trois dieux primordiaux hindous. Cette sculpture symbolise la puissance créatrice et la présence du dieu sans lui donner une figure humaine. L’absence d’image traduit ici une volonté de préserver l’irréductibilité du sacré, (en refusant de l’enfermer dans une représentation.)
+        Le linga est une forme non figurative du Shiva, l’un des trois dieux primordiaux hindous. Cette sculpture symbolise la puissance créatrice et la présence du dieu sans lui donner une figure humaine. L’absence d’image traduit ici une volonté de préserver l’irréductibilité du sacré, en refusant de l’enfermer dans une représentation.
       </p>
     </div>
   </div>
@@ -811,6 +848,10 @@
       <h4>Miḥrāb</h4>
       <p>
         Revêtement architectural, carreaux de céramique émaillée à décor épigraphique, Iran (probablement Ispahan), XVIIᵉ siècle, dimensions variables, The Metropolitan Museum of Art, New York, n° d’inv. 10.9
+      </p>
+      <p>
+        Dans l’art islamique, il existe une forte tradition de l’aniconisme ; au lieu de peintures ou de statues, l’art islamique est connu pour ses motifs géométriques complexes et sa calligraphie. Ces formes d’art visent à traduire la nature infinie d’Allah et la beauté de la création sans montrer aucune figure humaine.
+        Ce mihrab, composante importante de la mosquée dont l’emplacement indique la direction de La Mecque, vient de la Madrasa Imami d’Ispahan est décoré d’une mosaïque de petits carreaux glaçurés et assemblés de manière à former des motifs et des inscriptions. 
       </p>
     </div>
     <img src="images/1.11_mihrab.jpg" alt="Bouddha offrant sa protection" onclick="openModal(this)">
@@ -857,6 +898,7 @@
   </div>
 
   <h4 class="sous-sous-titre">Negative Space</h4>
+  <p class="texte">En art, en musique et en photographie, l'espace vide n'est pas rien. On l'appelle l'espace négatif. Il s'agit de l'espace vide autour et entre le sujet d'une image. Le sujet lui-même est appelé espace positif : la figure, l'objet ou l'élément principal. Tout ce qui l'entoure, l'espace inutilisé, est l'espace négatif. Dans le tracé d’un cercle, on retrouve par exemple cet espace creux, un manque d’existence qui crée un équilibre, un invisible sans qui le visible n’aurait pas de sens. L’absence devient alors présence, lorsque l’invisible se met au service du visible.</p>
 
     <!-- Galerie de 2 images centrées juste en dessous (œuvres 4 et 5) -->
   <div class="image-gallery" style="grid-template-columns: 1fr 1fr; max-width: 800px; margin: 0 auto 40px;">
@@ -864,9 +906,22 @@
       <img src="images/1.14_negative_space.jpg" alt="Triptyque avec le Mandylion">
       <div class="image-caption">"Negative Space", Earthwork (excavation monumentale), 1969–1970</div>
     </div>
-    <div class="image-item" onclick="openModal(this)">
-      <img src="images/1.15.png" alt="Ange de la présence divine amenant Ève à Adam">
-      <div class="image-caption">"L'art de la performance : théorie et pratique", Performance, 1988</div>
+    <div class="image-item has-link">
+      <a
+        href="https://www.youtube.com/watch?v=5SsuK9r8mk4"
+        target="_blank"
+        class="video-link"
+      >
+        <img
+          src="images/1.15.png"
+          alt="L'art de la performance : théorie et pratique"
+        >
+        <div class="play-overlay"></div>
+      </a>
+
+      <div class="image-caption">
+        "L'art de la performance : théorie et pratique" – Performance, 1988
+      </div>
     </div>
   </div>
 
@@ -877,6 +932,9 @@
       <h4>Negative Space</h4>
       <p>
         Earthwork (excavation monumentale), Michael Heizer, 1969–1970, États-Unis (Mormon Mesa, Nevada), 457 m de longueur totale (deux tranchées opposées), Museum of Contemporary Art (MOCA), Los Angeles, Crédits photo : Google Search
+      </p>
+      <p>
+        « Double négatif », est une œuvre fondamentale au sein du mouvement environnemental du land art. Elle présente deux tranchées massives découpées dans le bord oriental de la Mesa mormone dans le Nevada, aux États-Unis, incarnant l'interaction entre les paysages naturels et l'intervention humaine. Parfaite représentation de l’espace négatif, le spectateur voit dans le creux la roche qui fût un jour présente.
       </p>
     </div>
   </div>
@@ -891,8 +949,23 @@
       <p>
         Cette vidéo est la captation d’une représentation de « L’art de la performance : théorie et pratique » réalisée par Esther Ferrer à Berlin. Dans cette performance, elle donne une conférence complètement muette, articulant un propos concret mais inaudible, à l’exception du mot « performance » qu’elle scande occasionnellement, interrompant son silence. Entre chaque interruption, des lignes silencieuses se forment qui sont autant de vides ou d’espaces à traverser, à penser pour le spectateur. On retrouve dans son travail l’écho de 4’33’’, elle partage avec John Cage ce besoin de faire entendre le monde dans la disparition du discours. Son manque, cet espace négatif devient alors une présence puissante et invincible. 
       </p>
+          <!-- 🔥 BOUTON SOUS LE TEXTE -->
+      <a
+        href="https://www.youtube.com/watch?v=5SsuK9r8mk4"
+        target="_blank"
+        class="play-button"
+      >
+        ▶ Regarder la vidéo
+      </a>
     </div>
-    <img src="images/1.15.png" alt="Bouddha offrant sa protection" onclick="openModal(this)">
+    <a
+      href="https://www.youtube.com/watch?v=5SsuK9r8mk4"
+      target="_blank"
+      class="video-link image-item has-link"
+    >
+      <img src="images/1.15.png" alt="L'art de la performance : théorie et pratique">
+      <div class="play-overlay"></div>
+    </a>
   </div>
 
 
@@ -1122,11 +1195,14 @@
       <div class="image-text-row">
         <!-- Conteneur pour l'image avec bouton - SIMILAIRE À MADAME X -->
         <div class="image-item-container">
-          <img src="images/madelaine_deux_flammes.jpg" alt="La Madeleine aux deux flammes" onclick="openModal(this)">
+
+          <div class="image-item" onclick="openModal(this)">
+            <img src="images/madelaine_deux_flammes.jpg" alt="La Madeleine aux deux flammes" >
+          </div>
           
-          <!-- Bouton PLEINE LARGEUR en dessous de l'image -->
-          <div class="enfant-bouton-full" onclick="toggleMadeleineExplication(event)">
-            <img src="images/bouton.webp" alt="Bouton explication pour enfants">
+          <!-- RECTANGLE CLIQUABLE -->
+          <div class="enfant-bouton-rectangle" onclick="toggleMadeleineExplication(event)">
+            <img src="images/bouton.webp" alt="">
             <span>Explication pour les enfants</span>
           </div>
         </div>
@@ -1429,7 +1505,7 @@
       
       <!-- Image unique avec texte à côté (au lieu d'une galerie) -->
       <div class="image-text-row">
-        <img src="images/débauche.jpg" alt="Allégorie de la débauche et du plaisir" onclick="openModal(this)">
+        <img src="images/debauche.jpg" alt="Allégorie de la débauche et du plaisir" onclick="openModal(this)">
         <div class="image-text-content">
           <h4>Allégorie de la débauche et du plaisir</h4>
           <p>
@@ -1846,5 +1922,14 @@
       }
     });
   </script>
+
+  <section id="contact" style="height: 100vh; padding: 80px 40px;">
+    <h1>Contact</h1>
+    <p>Cette exposition a été conçue par des étudiants du CPES Science des données, Arts et Culture en lien avec le lycée Louis-le-Grand et l'Université PSL. Le projet a été réalisé dans le cadre du cours d'Histoire des Arts de Léa Saint-Raymond.</p>
+    <p>Pour nous contacter : </p>
+    <p>nais.noel@psl.eu ; noemie.sivacoumarin@psl.eu ; vittoria.sitzler@psl.eu ; miyu.goto@psl.eu</p>
+  </section>
+
+
 </body>
 </html>
