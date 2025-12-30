@@ -6,6 +6,9 @@ const lenis = new Lenis({
   lerp: 0.08, // fluidité du scroll
 });
 
+window.lenis = lenis;
+
+
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
@@ -60,8 +63,8 @@ function animateHero() {
   });
 }
 
-animateHero();
-loadProjects();
+//animateHero();
+//loadProjects();
 
 function animateAppearZoom() {
   document.querySelectorAll(".next-img").forEach((img) => {
@@ -124,8 +127,8 @@ function animateImageTransitions() {
   });
 }
 
-animateHero();
-loadProjects();
+//animateHero();
+//loadProjects();
 
 animateAppearZoom();      // effet image minuscule → grand écran
 animateImageTransitions(); // transitions entre images
@@ -161,6 +164,11 @@ function animatePreloader() {
     ease: "power3.inOut",
     onComplete: () => {
       document.getElementById("preloader").style.display = "none";
+      const fab = document.getElementById("fab-media");
+      if (fab) {
+        fab.classList.add("is-visible");
+      }
+
     }
   });
 
@@ -216,6 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.getElementById("custom-cursor");
   if (!cursor) return;
 
+  gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+
   // déplacement avec GSAP
   document.addEventListener("mousemove", (e) => {
     gsap.to(cursor, {
@@ -247,9 +257,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // appliquer l'effet sur TOUS les liens
-  document.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("mouseenter", cursorGrow);
-    link.addEventListener("mouseleave", cursorNormal);
+  //document.querySelectorAll("a").forEach((link) => {
+    //link.addEventListener("mouseenter", cursorGrow);
+    //link.addEventListener("mouseleave", cursorNormal);
+  //});
+
+  const clickableSelectors = `
+    a,
+    button,
+    .image-item,
+    .image-item-container,
+    .enfant-bouton-full,
+    img[onclick],
+    .audio-link,
+    .video-link
+  `;
+
+  document.querySelectorAll(clickableSelectors).forEach(el => {
+    el.addEventListener("mouseenter", cursorGrow);
+    el.addEventListener("mouseleave", cursorNormal);
   });
 
   // au début, on garde le curseur normal
@@ -300,31 +326,7 @@ function toggleMadeleineExplication(event) {
     }
   }
 }
-// Fonction pour basculer l'affichage du rectangle d'explication pour enfants (Madame X)
-function toggleEnfantExplication(event) {
-  event.stopPropagation(); // Empêcher la propagation du clic
-  
-  // Cibler le rectangle dans la salle 3
-  const explicationRect = document.getElementById("enfant-explication-salle3");
-  
-  if (explicationRect) {
-    // Fermer l'autre rectangle s'il est ouvert
-    const madeleineRect = document.getElementById("madeleine-explication");
-    if (madeleineRect && madeleineRect.style.display === "block") {
-      madeleineRect.style.display = "none";
-    }
-    
-    // Basculer l'affichage
-    if (explicationRect.style.display === "block" || explicationRect.style.display === "") {
-      explicationRect.style.display = "none";
-    } else {
-      explicationRect.style.display = "block";
-      
-      // Faire défiler jusqu'au rectangle pour qu'il soit visible
-      explicationRect.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-}
+
 
 // Fonction pour basculer l'affichage du rectangle d'explication pour la salle 1
 function toggleSalle1Explication(event) {
@@ -408,33 +410,417 @@ document.querySelectorAll('.dropdown-content a').forEach(link => {
 
 // ajout en plus 
 
-const images = document.querySelectorAll('.zoom-img');
-const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
-const modalText = document.getElementById('modal-text');
-const closeBtn = document.getElementById('close-modal');
 
-images.forEach(img => {
-  img.addEventListener('click', () => {
-    modalTitle.textContent = img.dataset.title || '';
-    modalText.innerHTML = img.dataset.text;
-    modal.classList.remove('hidden');
+
+function cursorZoomOn() {
+  const cursor = document.getElementById("custom-cursor");
+  if (!cursor) return;
+
+  gsap.to(cursor, {
+    width: 60,
+    height: 60,
+    duration: 0.25,
+    ease: "power3.out"
+  });
+}
+
+function cursorZoomOff() {
+  const cursor = document.getElementById("custom-cursor");
+  if (!cursor) return;
+
+  gsap.to(cursor, {
+    width: 20,
+    height: 20,
+    duration: 0.25,
+    ease: "power3.out"
+  });
+}
+
+
+function openModal(element) {
+  // 1) bon modal (celui de oeuvres.html)
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const caption = document.getElementById("modalCaption");
+  if (!modal || !modalImg || !caption) return;
+
+  // 2) si tu cliques sur une div, on récupère l'image dedans
+  let img = null;
+  if (element.tagName === "IMG") img = element;
+  else img = element.querySelector("img");
+  if (!img) return;
+
+  // 3) ouvrir le modal
+  modal.style.display = "flex";
+  modalImg.src = img.src;
+  modalImg.alt = img.alt || "";
+
+  // 4) caption (si disponible)
+  const capEl = element.querySelector(".image-caption");
+  caption.textContent = capEl ? capEl.textContent : (img.alt || "");
+
+  // 5) ✅ activer curseur zoom
+  cursorZoomOn();
+}
+
+// --- fermeture modal + reset curseur ---
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("imageModal");
+  const closeBtn = document.querySelector("#imageModal .close");
+  if (!modal) return;
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      cursorZoomOff();
+    });
+  }
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      cursorZoomOff();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      modal.style.display = "none";
+      cursorZoomOff();
+    }
   });
 });
 
-closeBtn.addEventListener('click', () => {
-  modal.classList.add('hidden');
+// bouton écouter enregistrement 4'33"
+let audio433 = null;
+let is433Playing = false;
+
+function toggle433Audio() {
+  if (!audio433) {
+    audio433 = new Audio("images/433_audio.mp3");
+    audio433.loop = false;
+
+    audio433.onended = function () {
+      is433Playing = false;
+      update433AudioUI();
+    };
+  }
+
+  if (!is433Playing) {
+    audio433.play();
+    is433Playing = true;
+  } else {
+    audio433.pause();
+    is433Playing = false;
+  }
+
+  update433AudioUI();
+}
+
+function update433AudioUI() {
+  const button = document.getElementById("audio433Button");
+  if (!button) return;
+
+  if (is433Playing) {
+    button.textContent = "⏸ Mettre en pause";
+    button.classList.add("playing");
+  } else {
+    button.textContent = "▶ Écouter l’enregistrement";
+    button.classList.remove("playing");
+  }
+}
+
+
+// modification problème de clic sur index.html
+
+// ===== MODAL + SCROLL LOCK (SANS LENIS) =====
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal");
+  const closeBtn = document.getElementById("close-modal");
+  const title = document.getElementById("modal-title");
+  const text = document.getElementById("modal-text");
+
+  if (!modal) return;
+
+  let scrollY = 0;
+
+  function openModal(img) {
+    scrollY = window.scrollY || 0;
+
+    title.innerHTML = img.dataset.title || "";
+    text.innerHTML = img.dataset.text || "";
+
+    modal.classList.remove("hidden");
+
+    document.body.classList.add("is-locked");
+    document.body.style.top = `-${scrollY}px`;
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+
+    document.body.classList.remove("is-locked");
+    document.body.style.top = "";
+
+    window.scrollTo(0, scrollY);
+  }
+
+  document.querySelectorAll(".zoom-img").forEach(img => {
+    img.addEventListener("click", () => openModal(img));
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
 });
 
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
+
+
+// ===== LOCK / UNLOCK SCROLL (ultra fiable) =====
+let _scrollY = 0;
+
+function lockScroll() {
+  _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.classList.add("is-locked");
+  document.body.style.top = `-${_scrollY}px`;
+
+  // Si Lenis existe, on le stoppe aussi
+  if (window.lenis && typeof window.lenis.stop === "function") {
+    window.lenis.stop();
+    window.lenis = lenis;
+
+  }
+}
+
+
+function unlockScroll() {
+  document.body.classList.remove("is-locked");
+  document.body.style.top = "";
+
+  window.scrollTo(0, _scrollY);
+
+  if (window.lenis && typeof window.lenis.start === "function") {
+    window.lenis.start();
+  }
+}
+
+
+// ===== FORCE SCROLL DANS LE MODAL (FALLBACK ULTIME) =====
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal");
+  const scrollZone = modal?.querySelector(".modal-scroll");
+
+  if (!modal || !scrollZone) {
+    console.warn("⚠️ modal ou modal-scroll introuvable");
+    return;
+  }
+
+  modal.addEventListener("wheel", (e) => {
+    // empêcher le scroll global
+    e.preventDefault();
+
+    // forcer le scroll de la zone texte
+    scrollZone.scrollTop += e.deltaY;
+  }, { passive: false });
+});
+
+// Bouton flottant
+
+const mediaMap = {
+  "section-433": {
+    type: "audio",
+    labelPlay: "▶ Écouter 4’33’’",
+    labelPause: "⏸ Pause 4’33’’",
+    src: "images/433_audio.mp3"
+  },
+  "section-derecho": {
+    type: "audio",
+    labelPlay: "▶ Écouter El derecho de vivir en paz",
+    labelPause: "⏸ Pause",
+    src: "images/derecho_audio.mp3"
+  },
+  "section-video-433": {
+    type: "video",
+    labelPlay: "▶ Voir la vidéo 4’33’’",
+    url: "https://www.youtube.com/watch?v=XXXX"
+  },
+  "section-video-derecho": {
+    type: "video",
+    labelPlay: "▶ Voir la vidéo",
+    url: "https://www.youtube.com/watch?v=YYYY"
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("floating-media-button");
+  if (!button) return;
+
+  let currentAudio = null;
+  let currentConfig = null;
+
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+      button.classList.remove("playing");
+    }
+  }
+
+  function updateButton(config) {
+    button.classList.remove("hidden");
+    button.textContent = config.labelPlay;
+    button.onclick = () => {
+      if (config.type === "audio") {
+        if (!currentAudio) {
+          currentAudio = new Audio(config.src);
+          currentAudio.onended = stopAudio;
+        }
+
+        if (currentAudio.paused) {
+          currentAudio.play();
+          button.textContent = config.labelPause;
+          button.classList.add("playing");
+        } else {
+          stopAudio();
+          button.textContent = config.labelPlay;
+        }
+      }
+
+      if (config.type === "video") {
+        window.open(config.url, "_blank");
+      }
+    };
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const config = mediaMap[entry.target.id];
+          if (!config) return;
+
+          stopAudio();
+          currentConfig = config;
+          updateButton(config);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  Object.keys(mediaMap).forEach(id => {
+    const section = document.getElementById(id);
+    if (section) observer.observe(section);
+  });
+});
+
+// ===== BOUTON AUDIO / VIDÉO FIXE =====
+// ===== FAB MEDIA : menu + audio =====
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("fab-toggle");
+  const menu = document.getElementById("fab-menu");
+  const fab = document.getElementById("fab-media");
+
+  const btn433 = document.getElementById("fab-audio-433");
+  const btnDerecho = document.getElementById("fab-audio-derecho");
+
+  if (!toggle || !menu || !fab) return;
+
+  let currentAudio = null;
+  let currentButton = null;
+
+  function openMenu() {
+    menu.classList.add("is-open");
+    menu.setAttribute("aria-hidden", "false");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.textContent = "×";
+  }
+
+  function closeMenu() {
+    menu.classList.remove("is-open");
+    menu.setAttribute("aria-hidden", "true");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "+";
+  }
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (menu.classList.contains("is-open")) closeMenu();
+    else openMenu();
+  });
+
+  // fermer si clic ailleurs
+  document.addEventListener("click", (e) => {
+    if (!fab.contains(e.target)) closeMenu();
+  });
+
+  // fermer avec Echap
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+    }
+    if (currentButton) {
+      currentButton.classList.remove("playing");
+      if (currentButton === btn433) currentButton.textContent = "▶ Écouter 4’33’’";
+      if (currentButton === btnDerecho) currentButton.textContent = "▶ Écouter El derecho";
+      currentButton = null;
+    }
+  }
+
+  function toggleAudio(button, src, labelPlay, labelPause) {
+    // si on clique sur le même bouton et que ça joue => pause
+    if (currentButton === button && currentAudio && !currentAudio.paused) {
+      stopAudio();
+      return;
+    }
+
+    // sinon, on coupe l'éventuel audio en cours
+    stopAudio();
+
+    currentAudio = new Audio(src);
+    currentButton = button;
+
+    currentAudio.onended = stopAudio;
+
+    currentAudio.play().then(() => {
+      button.classList.add("playing");
+      button.textContent = labelPause;
+    }).catch((err) => {
+      // Si le navigateur bloque (autoplay policy), tu verras l'erreur ici
+      console.error("Audio play error:", err);
+      stopAudio();
+    });
+  }
+
+  if (btn433) {
+    btn433.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleAudio(
+        btn433,
+        "images/433_audio.mp3",            // ✅ mets ton vrai fichier
+        "▶ Écouter 4’33’’",
+        "⏸ Pause 4’33’’"
+      );
+    });
+  }
+
+  if (btnDerecho) {
+    btnDerecho.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleAudio(
+        btnDerecho,
+        "images/Victor Jara - El Derecho de Vivir en Paz (audio oficial).mp3",        // ✅ mets ton vrai fichier
+        "▶ Écouter El derecho",
+        "⏸ Pause"
+      );
+    });
   }
 });
 
-modal.classList.remove('hidden');
-document.body.classList.add('modal-open');
-
-
-modal.classList.add('hidden');
-document.body.classList.remove('modal-open');
